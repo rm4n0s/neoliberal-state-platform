@@ -1,0 +1,25 @@
+<div>
+  <div class="row">
+    <div class="col-md-6">
+      <div *ngFor="let account of accounts">
+        <app-state-account-as-item
+          [name]="account.name"
+          [description]="account.description"
+          [address]="account.address"
+        ></app-state-account-as-item>
+      </div>
+      <ngb-pagination
+        [collectionSize]="totalAccounts"
+        [(page)]="currentAccountsPage"
+        [pageSize]="sizeAccountsPage"
+        [boundaryLinks]="true"
+        (pageChange)="pageAccountChange($event)"
+      ></ngb-pagination>
+    </div>
+    <div class="col-md-6">
+      <app-create-account-form
+        (afterSuccess)="afterAccountCreation($event)"
+      ></app-create-account-form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<div>
+  <div class="row">
+    <div class="col-md-2"><b>Reason:</b></div>
+    <div class="col-md-4">{{ transfer.reason }}</div>
+    <span class="col-md-4">{{ transfer.createdAt }}</span>
+  </div>
+  <div class="row">
+    <div class="col-md-2"><b>Source:</b></div>
+    <div class="col-md-4">{{ transfer.source }}</div>
+  </div>
+  <div class="row" *ngFor="let amount of transfer.amounts">
+    <div class="col-md-2">
+      <b>{{ amount.assetName }}:</b>
+    </div>
+    <div class="col-md-6">{{ amount.amountNumber }}</div>
+  </div>
+  <div class="row">
+    <div class="col-md-2"><b>Lumen:</b></div>
+    <div class="col-md-6">
+      {{ transfer.includedLumens }}
+    </div>
+  </div>
+</div>

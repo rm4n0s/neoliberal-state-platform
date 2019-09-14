@@ -1,0 +1,74 @@
+<div class="container">
+  <h2>Create Account</h2>
+  <div class="row">
+    <div class="col-md-4">
+      <label>Name</label>
+    </div>
+    <div class="col-md-5">
+      <input type="text" [formControl]="name" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <label>Description</label>
+    </div>
+    <div class="col-md-5">
+      <input type="text" [formControl]="description" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <label>Master Public Key</label>
+    </div>
+    <div class="col-md-6">
+      <input type="text" [formControl]="masterKey" />
+      <button type="button" class="btn btn-outline-dark" (click)="createKey()">
+        create key
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <label>Master Secret</label>
+    </div>
+    <div class="col-md-5">
+      <span>{{ masterSecret }}</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <label>Include lumens</label>
+    </div>
+    <div class="col-md-5">
+      <input type="text" [formControl]="includeLumens" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <label>Requester's Secret</label>
+    </div>
+    <div class="col-md-5">
+      <input type="text" [formControl]="secret" />
+    </div>
+  </div>
+  <p *ngIf="errorMessage">
+    <ngb-alert [type]="'danger'" (close)="closeError()">{{
+      errorMessage
+    }}</ngb-alert>
+  </p>
+  <button
+    type="button"
+    class="btn btn-outline-dark"
+    *ngIf="!isLoading"
+    (click)="submit()"
+  >
+    Submit
+  </button>
+  <div class="fa-3x">
+    <fa-icon
+      *ngIf="isLoading"
+      [icon]="['fas', 'spinner']"
+      [spin]="true"
+    ></fa-icon>
+  </div>
+</div>

@@ -1,0 +1,64 @@
+<div>
+  <h4>{{ account.address }}</h4>
+  <div class="row"></div>
+  <div class="row">
+    <div class="col-md-3">
+      <b>Total Amount:</b>
+    </div>
+    <div class="col-md-4">
+      <span>{{ totalAmount }}</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <b>Total Lumen:</b>
+    </div>
+    <div class="col-md-4">
+      <span>{{ totalLumen }}</span>
+    </div>
+  </div>
+  <div [hidden]="isAmountsHidden" *ngFor="let amount of account.amounts">
+    <div class="row">
+      <div class="col-md-3">
+        <b>{{ amount.assetName }}:</b>
+      </div>
+      <div class="col-md-4">
+        {{ amount.amountNumber }}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <button type="button" class="btn btn-outline-dark" (click)="reload()">
+        Reload
+      </button>
+
+      <button
+        [hidden]="!isAmountsHidden"
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="showAmounts()"
+      >
+        Show
+      </button>
+      <button
+        [hidden]="isAmountsHidden"
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="hideAmounts()"
+      >
+        Hide
+      </button>
+      <app-payment-form
+        [account]="account"
+        (afterPayment)="afterPayment($event)"
+      ></app-payment-form>
+    </div>
+
+    <div class="col-md-6">
+      <button type="button" class="btn btn-outline-dark" (click)="remove()">
+        Remove
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,96 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      Transfer money to a state account
+    </h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <div class="row">
+        <div class="col-md-3">
+          <label> Requester Secret</label>
+        </div>
+        <div class="col-md-6">
+          <input type="text" [formControl]="secret" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <label> Source </label>
+        </div>
+        <div class="col-md-6">
+          <select [formControl]="source">
+            <option value="printer">Printer</option>
+            <option value="taxes">Taxes</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <label> Receiver</label>
+        </div>
+        <div class="col-md-6">
+          <input type="text" [formControl]="receiver" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <label> Reason</label>
+        </div>
+        <div class="col-md-6">
+          <input type="text" [formControl]="reason" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <label> Include lumens</label>
+        </div>
+        <div class="col-md-6">
+          <input type="text" [formControl]="includeLumens" />
+        </div>
+      </div>
+      <div class="row" *ngFor="let amount of amounts | keyvalue">
+        <div class="col-md-3">
+          <label> {{ amount.key }}</label>
+        </div>
+        <div class="col-md-6">
+          <input type="text" [formControl]="amount.value" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <p *ngIf="errorMsg">
+      <ngb-alert [type]="'danger'" (close)="closeError()">{{
+        errorMsg
+      }}</ngb-alert>
+    </p>
+    <button
+      *ngIf="!isLoading"
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="submit(modal)"
+    >
+      Submit
+    </button>
+    <div class="fa-3x">
+      <fa-icon
+        *ngIf="isLoading"
+        [icon]="['fas', 'spinner']"
+        [spin]="true"
+      ></fa-icon>
+    </div>
+  </div>
+</ng-template>
+
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)">
+  Transfer Money
+</button>

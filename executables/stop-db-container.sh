@@ -1,0 +1,1 @@
+podman stop neoliberal_database && podman rm neoliberal_database

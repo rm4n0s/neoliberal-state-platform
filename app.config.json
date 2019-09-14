@@ -1,0 +1,33 @@
+{
+  "publicKey": "GARHNBZDXJBRRUYS6UO3A7FHTY4OG3VFGGRH4455Q54PULH3AYWJ2U3B",
+  "privateKey": "SCIGXACTI7PGLBNIYARGNU2AAFFUWEHK6SNEXF6R2PTRVBYYPHMQQ276",
+  "currencyUnits": [
+    "1",
+    "2",
+    "5",
+    "10",
+    "20",
+    "50",
+    "100",
+    "200",
+    "c10",
+    "c20",
+    "c50"
+  ],
+  "listAdmins": ["GARHNBZDXJBRRUYS6UO3A7FHTY4OG3VFGGRH4455Q54PULH3AYWJ2U3B"],
+  "limitLumens": "10000",
+  "isTest": true,
+  "dbOptions": {
+    "type": "mysql",
+    "host": "localhost",
+    "port": 3306,
+    "username": "user",
+    "password": "pass",
+    "database": "db"
+  },
+  "horizonUrl": "https://horizon-testnet.stellar.org",
+  "stellarTimeout": 1000,
+  "port": 8000,
+  "baseFeeMultiplier": 10,
+  "enoughLumenForAssetAccount": "3"
+}

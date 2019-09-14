@@ -1,0 +1,44 @@
+<div *ngIf="config" class="container content">
+  <h1>Configurations</h1>
+  <div class="row">
+    <div class="col-md-2">
+      <span><strong>Public Key</strong></span>
+    </div>
+    <div class="col-md-6">{{ config.publicKey }}</div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <span><strong>Assets</strong></span>
+    </div>
+    <div class="col-md-6">
+      <ul>
+        <li *ngFor="let asset of config.currencyUnits">{{ asset }}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <span><strong>List admins</strong></span>
+    </div>
+    <div class="col-md-6">
+      <ul>
+        <li *ngFor="let admin of config.listAdmins">{{ admin }}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <span nz-text><strong>Limit lumens</strong></span>
+    </div>
+    <div class="col-md-6">{{ config.limitLumens }}</div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <span><strong>Is test</strong></span>
+    </div>
+    <div class="col-md-6">
+      <fa-icon *ngIf="config.isTest" icon="check"></fa-icon>
+      <fa-icon *ngIf="!config.isTest" icon="times"></fa-icon>
+    </div>
+  </div>
+</div>

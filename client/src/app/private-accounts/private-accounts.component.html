@@ -1,0 +1,53 @@
+<div class="container">
+  <h2>Private Accounts</h2>
+  <div class="row">
+    <div class="col-md-2">
+      <label>Address</label>
+    </div>
+    <div class="col-md-6">
+      <input type="text" [formControl]="address" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <label>Secret</label>
+    </div>
+    <div class="col-md-6">
+      <input type="text" [formControl]="secret" />
+    </div>
+  </div>
+  <button type="button" class="btn btn-outline-dark" (click)="submitAddress()">
+    Submit
+  </button>
+  <button type="button" class="btn btn-outline-dark" (click)="reloadList()">
+    Reload
+  </button>
+  <div class="row">
+    <div class="col-md-2"><b>Total Amount:</b></div>
+    <div class="col-md-2">
+      {{ totalAmount }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2"><b>Total Lumen:</b></div>
+    <div class="col-md-2">
+      {{ totalLumen }}
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div *ngFor="let account of accounts">
+    <app-private-account-as-item
+      [account]="account"
+      (reloadItem)="reloadItem($event)"
+      (removeItem)="removeItem($event)"
+    ></app-private-account-as-item>
+  </div>
+  <ngb-pagination
+    [collectionSize]="totalAccounts"
+    [(page)]="currentAccountsPage"
+    [pageSize]="sizeAccountsPage"
+    [boundaryLinks]="true"
+    (pageChange)="pageAccountChange($event)"
+  ></ngb-pagination>
+</div>

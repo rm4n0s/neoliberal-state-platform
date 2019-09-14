@@ -1,0 +1,31 @@
+<div>
+  <h4>Hash: {{ hash }}</h4>
+  <button type="button" class="btn btn-outline-dark" (click)="remove()">
+    Remove
+  </button>
+  <app-withdraw-form [deposit]="deposit"></app-withdraw-form>
+  <div class="row">
+    <div class="col-md-3">
+      <b>Amount to receive:</b>
+    </div>
+    <div class="col-md-6">
+      <span>{{ deposit.untaxedNumber }}</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <b>Tax:</b>
+    </div>
+    <div class="col-md-6">
+      <span>{{ deposit.taxedNumber }}</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <b>Total:</b>
+    </div>
+    <div class="col-md-6">
+      <span>{{ deposit.totalNumber }}</span>
+    </div>
+  </div>
+</div>

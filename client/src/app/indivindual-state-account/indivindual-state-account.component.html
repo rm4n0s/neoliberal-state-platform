@@ -1,0 +1,56 @@
+<div *ngIf="account">
+  <div class="row">
+    <div class="col-md-6">
+      <h4>{{ account.name }}</h4>
+      <div class="row">
+        <div class="col-md-2">
+          <b>Description:</b>
+        </div>
+        <div class="col-md-6">
+          {{ account.description }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <b>Address:</b>
+        </div>
+        <div class="col-md-6">
+          {{ account.address }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <b>Amounts:</b>
+        </div>
+        <div class="col-md-6">
+          <ul>
+            <li *ngFor="let balance of balances">
+              <b>{{ balance.asset }}:</b> {{ balance.balanceNumber }}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <app-transfer-form
+        [address]="account.address"
+        [assets]="assets"
+        (afterSuccess)="afterNewTransfer($event)"
+      ></app-transfer-form>
+    </div>
+    <div class="col-md-6">
+      <h3>Transfers</h3>
+      <div *ngFor="let transfer of transfers">
+        <app-transfer-as-item [transfer]="transfer"></app-transfer-as-item>
+        <hr
+          style="width: 100%; color: black; height: 1px; background-color:black;"
+        />
+      </div>
+      <ngb-pagination
+        [collectionSize]="totalTransfers"
+        [(page)]="currentTransfersPage"
+        [pageSize]="sizeTransfersPage"
+        [boundaryLinks]="true"
+        (pageChange)="pageTransferChange($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

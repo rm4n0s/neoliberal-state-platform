@@ -1,0 +1,44 @@
+<div class="container">
+  <h2>Taxes</h2>
+  <div class="row">
+    <div class="col-md-3">
+      <label>Requester Secret</label>
+    </div>
+    <div class="col-md-5">
+      <input type="text" [formControl]="requesterSecret" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <label>Tax</label>
+    </div>
+    <div class="col-md-5">
+      <input type="text" [formControl]="tax" />
+    </div>
+  </div>
+  <p *ngIf="errorMessage">
+    <ngb-alert [type]="'danger'" (close)="closeError()">{{
+      errorMessage
+    }}</ngb-alert>
+  </p>
+  <button
+    type="button"
+    class="btn btn-outline-dark"
+    *ngIf="!isLoading"
+    (click)="submit()"
+  >
+    Submit
+  </button>
+  <div>
+    <div *ngFor="let tax of taxes">
+      <app-tax-as-item [tax]="tax"></app-tax-as-item>
+    </div>
+    <ngb-pagination
+      [collectionSize]="totalTaxes"
+      [(page)]="currentTaxesPage"
+      [pageSize]="sizeTaxesPage"
+      [boundaryLinks]="true"
+      (pageChange)="pageTaxesChange($event)"
+    ></ngb-pagination>
+  </div>
+</div>

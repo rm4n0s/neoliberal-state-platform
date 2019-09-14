@@ -1,0 +1,305 @@
+
+# Accounts
+Service to create accounts for the public sector
+
+## Create an account 
+POST /api/accounts
+REQ:
+{
+    data:{
+        masterKey: string;
+        requester: string;
+        description: string;
+        name: string;
+        includeLumens: string;
+        nonce: string;
+    },
+    stringifiedData: string;
+    signature: string;
+}
+RESP:
+    200:
+        {
+            address: string;
+            masterKey: string;
+            requester: string;
+            description: string;
+            name: string;
+            createdAt: Date;
+            signature: string;
+            signedData: string;
+        }
+    422
+    500
+
+
+## Get information about an account
+GET /api/accounts/:address
+RESP:
+    200
+        {
+            address: string;
+            masterKey: string;
+            requester: string;
+            description: string;
+            name: string;
+            createdAt: Date;
+            signature: string;
+            signedData: string;
+        }
+    404  
+
+## Get list of transfers for the account based on the address
+GET /api/accounts/:address/transfers
+RESP:
+    200:
+        {
+            page: number;
+            totalPages: number;
+            total: number;
+            size: number;
+            data:  []{
+                id: number;
+                requester: string;
+                receiver: string;
+                reason: string;
+                signature: string;
+                signedData: string;
+                includedLumens: string;
+                createdAt: Date;
+                amounts: []{
+                    assetName: string;
+                    amount: string;
+                };
+            };
+        }
+    404
+
+## Get list of balances for the account based on the address
+GET /api/accounts/:address/balances
+RESP:
+    200:
+        []{
+            asset: string;
+            balance: string;
+        }
+
+## Get list of accounts
+GET /api/accounts
+RESP:
+    200:
+        {
+            page: number;
+            totalPages: number;
+            total: number;
+            size: number;
+            data:  []{
+                address: string;
+                masterKey: string;
+                requester: string;
+                description: string;
+                name: string;
+                createdAt: Date;
+                signature: string;
+                signedData: string;
+            }
+        }
+
+# Transfer
+Service to transfer new money to the public sector accounts
+
+## New transfer
+POST /api/transfers
+REQ:
+    {
+        data: {
+            requester: string;
+            receiver: string;
+            reason: string;
+            includeLumens: string;
+            amounts: []{
+                    assetName: string;
+                    amount: string;
+            };
+            nonce: string;
+        };
+        stringifiedData: string;
+        signature: string;
+    }
+RESP:
+    200:
+        {
+            id: number;
+            requester: string;
+            receiver: string;
+            reason: string;
+            signature: string;
+            signedData: string;
+            includedLumens: string;
+            createdAt: Date;
+            amounts: amounts: []{
+                    assetName: string;
+                    amount: string;
+            };
+        }
+    422
+    500
+
+## Get list of transfers
+GET /api/transfers
+RESP:
+    200:
+        {
+            page: number;
+            totalPages: number;
+            total: number;
+            size: number;
+            data:  []{ 
+                id: number;
+                requester: string;
+                receiver: string;
+                reason: string;
+                signature: string;
+                signedData: string;
+                includedLumens: string;
+                createdAt: Date;
+                amounts: amounts: []{
+                    assetName: string;
+                    amount: string;
+                };
+            }
+        }
+
+## Get a transfer based on id
+GET /api/transfers/:id
+RESP:
+    200:
+        {
+            id: number;
+            requester: string;
+            receiver: string;
+            reason: string;
+            signature: string;
+            signedData: string;
+            includedLumens: string;
+            createdAt: Date;
+            amounts: amounts: []{
+                assetName: string;
+                amount: string;
+            };
+        }
+    404
+
+# Deposit
+Service to receive the amount of money from transactions
+
+## Show the amount deposited
+POST /api/deposits/info
+REQ:
+{
+    hash: string
+    password: string
+}
+RESP:
+    200: 
+        {
+            hash: string;
+            untaxedNumber: string;
+            taxedNumber: string;
+            totalNumber: string;
+            withdraws:[]{
+                    uuid: string;
+                    depositHash: string;
+                    amountNumber: string;
+                    taxReceivedNumber: string;
+                    assets: []{
+                        amountNumber: string;
+                        assetName: string;
+                        masterKey: string;
+                    };
+                    totalNumber: string;
+                    createdAt: Date;
+            };
+            createdAt: Date;
+        }
+    404 Does not exists
+    401 Unauthorized
+
+## Withdraw from the deposit
+POST /api/withdraws
+REQ:
+{
+    password: string
+    assets:[
+        {
+            assetName: string
+            masterKey: string
+        }
+    ]
+    withdrawHash: hash
+}
+RESP:
+    200
+        [{
+            assetName: string
+            accountKey: string
+            masterKey: string 
+        }]
+    422 Asset name does not exists
+    422 The deposite is empty
+    422 The assets doesn't withdraw all the amount
+    422 The assets are more than the current amount
+    401
+
+## List withdraws based on the deposit
+POST /api/withdraws/list
+REQ:
+{
+    hash: string
+    password: string
+}
+RESP
+    200:
+        [
+            {
+                id
+                hash
+                depositId
+                amount
+                tax
+                total
+                assets: [{
+                    assetName: string
+                    accountKey: string
+                    masterKey: string 
+                }]   
+                createdAt 
+            }
+        ]
+    404
+    401
+
+## List transactions
+POST /api/transactions
+REQ:
+{
+    hash: string
+    password: string
+}
+RESP
+    200:
+        [
+            {
+                - id
+                - deposit_id
+                - asset
+                - account 
+                - createdAt
+            }
+        ]
+    404
+    401
+
+
+## Listening transactions from platform's account
+    - For each transaction will read  

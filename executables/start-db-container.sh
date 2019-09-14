@@ -1,0 +1,1 @@
+podman run --log-level=debug -d --privileged  --name neoliberal_database -v dbvolume:/var/lib/mysql/data -e MYSQL_USER=user -e MYSQL_PASSWORD=pass -e MYSQL_DATABASE=db -p 3306:3306 fedora/mariadb

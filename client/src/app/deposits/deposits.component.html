@@ -1,0 +1,22 @@
+<div class="container">
+  <h2>Deposits</h2>
+  <app-deposit-form (reloadList)="reloadList()"></app-deposit-form>
+  <button c class="btn btn-outline-dark" (click)="reloadList()">
+    Reload
+  </button>
+</div>
+<div class="container">
+  <div *ngFor="let deposit of deposits">
+    <app-deposit-as-item
+      [deposit]="deposit"
+      (reloadList)="reloadList()"
+    ></app-deposit-as-item>
+  </div>
+  <ngb-pagination
+    [collectionSize]="totalDeposits"
+    [(page)]="currentDepositsPage"
+    [pageSize]="sizeDepositsPage"
+    [boundaryLinks]="true"
+    (pageChange)="pageDepositChange($event)"
+  ></ngb-pagination>
+</div>
