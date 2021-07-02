@@ -35,7 +35,7 @@
     "ngx-webstorage-service": "^4.0.1",
     "rxjs": "~6.4.0",
     "stellar-base": "^1.1.1",
-    "stellar-sdk": "^2.2.1",
+    "stellar-sdk": "^8.2.3",
     "tslib": "^1.10.0",
     "uuid": "^3.3.2",
     "zone.js": "~0.9.1"
