@@ -36,7 +36,7 @@
     "fp-ts": "^2.0.3",
     "lodash": "^4.17.15",
     "mysql": "^2.17.1",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.7",
     "pg": "^7.12.0",
     "promise-mysql": "^4.1.0",
     "reflect-metadata": "^0.1.12",
